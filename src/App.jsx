@@ -8,14 +8,20 @@ import axios from 'axios'
 function App() {
   const [count, setCount] = useState(0)
   const [clicks, setClicks] = useState(0)
-  const [gifs, setGifs] = useState([])
-  const apiKey = process.env.REACT_APP_GIPHY_API_KEY;
+  const apiKey = import.meta.env.VITE_API_KEY;
+  
 
   useEffect(() => {
     const fetchGifs = async () => {
       try {
         const response = await axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=10`);
-        setGifs(response.data.data);
+        const gifUrls = response.data.data.map(gif => gif.images.original.url);
+        setCards(prevCards =>
+          prevCards.map((card, index) => ({
+            ...card,
+            image: gifUrls[index % gifUrls.length],
+          }))
+        );
       } catch (error) {
         console.error("Error fetching GIFs:", error);
       }
