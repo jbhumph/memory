@@ -9,7 +9,7 @@ function App() {
   const [count, setCount] = useState(0)
   const [clicks, setClicks] = useState(0)
   const [gifs, setGifs] = useState([])
-  const apiKey = "9bwQSHm4AonkWDphmukAN1Il21uiIJ84"
+  const apiKey = process.env.REACT_APP_GIPHY_API_KEY;
 
   useEffect(() => {
     const fetchGifs = async () => {
