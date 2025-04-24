@@ -1,8 +1,8 @@
-function Header() {
+function Header({count, clicks}) {
     return (
         <>
-            <div className="scoreboard">Score: 0</div>
-            <div className="clicks">Clicks: 0</div>
+            <div className="scoreboard">Score: {count}</div>
+            <div className="clicks">Clicks: {clicks}</div>
         </>
     )
 }
